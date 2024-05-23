@@ -1,0 +1,23 @@
+
+    private String pathToFile; private Map<String, String> initialValue;
+    public FileKV(String pathToFile, Map<String, String> initialValue) {
+        this.pathToFile = pathToFile;
+        this.initialValue = initialValue;
+    }
+
+    public void write(String key, String value) {
+        writeToFile(key, value);
+    }
+
+    public String get(String key, String defaultValue) {
+        return readFromFile(key, defaultValue);
+    }
+
+    private void writeToFile(String key, String value) {
+        writeToFile(pathToFile, key, value);
+    }
+
+    private void readFromFile(String key, String defaultValue) {
+        return readFromFile(pathToFile, key, defaultValue);
+    }
+}
