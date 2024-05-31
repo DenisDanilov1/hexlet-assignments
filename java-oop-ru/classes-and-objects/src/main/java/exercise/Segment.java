@@ -18,4 +18,5 @@ public class Segment {
 	 return new Point((beginPoint.getX() + endPoint.getX()) / 2,
                         (beginPoint.getY() + endPoint.getY()) / 2 );
      }
+}
 // END
