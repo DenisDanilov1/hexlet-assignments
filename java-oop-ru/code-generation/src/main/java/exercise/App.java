@@ -17,4 +17,5 @@ public class App {
         Car instance = Car.unserialize(jsonRepresentation);
         return instance;
     }
+}
 // END
