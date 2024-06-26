@@ -3,9 +3,9 @@ package exercise;
 // BEGIN
 class Flat implements Home {
 
-    final double area — жилая площадь квартиры;
-    final double balconyArea — площадь балкона;
-    final int floor — этаж, на котором расположена квартира.
+    final double area;
+    final double balconyArea;
+    final int floot;
 
     public Flat(double area, double balconyArea, int floor) {
         this.area = area;

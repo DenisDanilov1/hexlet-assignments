@@ -1,10 +1,8 @@
 package exercise;
 
 // BEGIN
-public class Home {
-
-    public int getArea();
-    public String compareTo();
-
+public interface Home {
+    double getArea();
+    int compareTo(Home another);
 }
 // END
