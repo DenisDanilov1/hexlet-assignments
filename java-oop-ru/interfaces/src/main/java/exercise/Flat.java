@@ -10,11 +10,11 @@ class Flat implements Home {
     public Flat(double area, double balconyArea, int floor) {
         this.area = area;
         this.balconyArea = balconyArea;
-        this.floor = floor.
+        this.floor = floor;
     }
 
     public String toString() {
-        return "Квартира площадью " + area + " метров на " + floor.
+        return "Квартира площадью " + area + " метров на " + floor;
     }
 
     public int compareTo(Home another) {

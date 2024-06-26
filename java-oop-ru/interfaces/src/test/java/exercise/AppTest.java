@@ -1,4 +1,4 @@
-package exercise;
+ackage exercise;
 
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -58,14 +58,14 @@ class AppTest {
 
     // BEGIN
     @Test
-	public void testToString() {
+    public void testToString() {
 	ReversedSequence reversedSequence = new ReversedSequence("abc");
 	String actual = reversedSequence.toString();
 	assertEquals("abc", actual);
-	}
+    }
     @Test
-	 public void testException() {
+    public void testException() {
 	 assertThrows(ArithmeticException.class, () -> reversedSequence.reverse(), "Reversed sequence should throw ArithmeticException");
-	}
+    }
     // END
 }
