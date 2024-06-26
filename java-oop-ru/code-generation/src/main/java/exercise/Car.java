@@ -14,7 +14,7 @@ class Car {
     User owner;
 
     // BEGIN
-     public String serialize() throws Exception {
+    public String serialize() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonRepresentation = objectMapper.writeValueAsString(this);
         return jsonRepresentation;
