@@ -1,26 +1,38 @@
 package exercise;
 
 // BEGIN
-class Flat implements Home {
+package exercise;
 
-    final double area;
-    final double balconyArea;
-    final int floot;
+public class Flat implements Home {
+    private double area;
+    private double floor;
+    private double totalArea;
 
-    public Flat(double area, double balconyArea, int floor) {
+    public Flat(double area, double balconyArea, double floor) {
         this.area = area;
-        this.balconyArea = balconyArea;
         this.floor = floor;
+        this.totalArea = area + balconyArea;
     }
 
-    public String toString() {
-        return "Квартира площадью " + area + " метров на " + floor;
+    @Override
+    public double getArea() {
+        return totalArea;
     }
 
+    @Override
     public int compareTo(Home another) {
-        return 1;
-        return -1;
-        return 0;
+        if (this.getArea() == another.getArea()) {
+            return 0;
+        } else if (this.getArea() > another.getArea()) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Квартира площадью " + totalArea + " метров на " + floor + " этаже";
     }
 }
 // END
