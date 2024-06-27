@@ -2,11 +2,12 @@ package exercise;
 
 // BEGIN
 public class Flat implements Home {
+
     private double area;
-    private double floor;
+    private int floor;
     private double totalArea;
 
-    public Flat(double area, double balconyArea, double floor) {
+    public Flat(double area, double balconyArea, int floor) {
         this.area = area;
         this.floor = floor;
         this.totalArea = area + balconyArea;
