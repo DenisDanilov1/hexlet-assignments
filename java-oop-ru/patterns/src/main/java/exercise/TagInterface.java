@@ -1,11 +1,7 @@
 package exercise;
 
 // BEGIN
-public class TagInterface {
-
-    @Override
-    public String render() {
-        return "String representation of tag";
-    }
+interface TagInterface {
+    String render();
 }
 // END
