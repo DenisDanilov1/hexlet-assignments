@@ -1,9 +1,10 @@
 package exercise;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 // BEGIN
-class Tag {
+public class Tag {
 
     private String name;
     private Map<String, String> attributes;
@@ -17,8 +18,8 @@ class Tag {
         return attributes.keySet().stream()
             .map(key -> {
                 String value = attributes.get(key);
-                return String.format(" %s=\"%s\"", key, value);
-            })
+                return String.format(" %s=\"%s\"", key, value)
+	    })
             .collect(Collectors.joining(""));
     }
 
