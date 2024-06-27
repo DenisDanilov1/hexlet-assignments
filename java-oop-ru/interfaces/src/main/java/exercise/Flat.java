@@ -1,8 +1,6 @@
 package exercise;
 
 // BEGIN
-package exercise;
-
 public class Flat implements Home {
     private double area;
     private double floor;
