@@ -18,7 +18,7 @@ public class Tag {
         return attributes.keySet().stream()
             .map(key -> {
                 String value = attributes.get(key);
-                return String.format(" %s=\"%s\"", key, value)
+                return String.format(" %s=\"%s\"", key, value);
 	    })
             .collect(Collectors.joining(""));
     }
