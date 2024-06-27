@@ -1,7 +1,6 @@
 package exercise;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.Assert.assertEquals;
 import static org.assertj.core.api.Assertions.assertThat;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,19 +60,19 @@ class AppTest {
     @Test
     public void testToString() {
         ReversedSequence reversedSequence = new ReversedSequence("hello");
-        assertEquals("olleh", reversedSequence.toString());
+        assertThat("olleh").isEqualTo(reversedSequence.toString());
     }
 
     @Test
     public void testEmptyString() {
         ReversedSequence reversedSequence = new ReversedSequence("");
-        assertEquals("", reversedSequence.toString());
+        assertThat("").isEqualTo(reversedSequence.toString());
     }
 
     @Test
     public void testNumbers() {
         ReversedSequence reversedSequence = new ReversedSequence("12345");
-        assertEquals("54321", reversedSequence.toString());
+        assertThat("54321").isEqualTo(reversedSequence.toString());
     }
     // END
 }
