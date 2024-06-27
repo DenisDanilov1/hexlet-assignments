@@ -4,27 +4,14 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 // BEGIN
-public class Tag {
+class SingleTag extends Tag {
 
-    private String name;
-    private Map<String, String> attributes;
-
-    Tag(String name, Map<String, String> attributes) {
-        this.name = name;
-        this.attributes = attributes;
+    SingleTag(String name, Map<String, String> attributes) {
+        super(name, attributes);
     }
 
-    public String stringifyAttributes() {
-        return attributes.keySet().stream()
-            .map(key -> {
-                String value = attributes.get(key);
-                return String.format(" %s=\"%s\"", key, value);
-	    })
-            .collect(Collectors.joining(""));
-    }
-
-    public String getName() {
-        return name;
+    public String toString() {
+        return String.format("<%s%s>", getName(), stringifyAttributes());
     }
 }
 // END
