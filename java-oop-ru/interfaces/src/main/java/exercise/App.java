@@ -1,6 +1,7 @@
 package exercise;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 // BEGIN
@@ -12,7 +13,7 @@ public class App {
 
         for (Home apartment : apartments) {
             if (apartment.getArea() > n) {
-                result.add(apartment.gecompareTo());
+                result.add(apartment.compareTo());
             }
         }
 

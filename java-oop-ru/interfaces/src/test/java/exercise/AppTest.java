@@ -59,13 +59,20 @@ class AppTest {
     // BEGIN
     @Test
     public void testToString() {
-	ReversedSequence reversedSequence = new ReversedSequence("abc");
-	String actual = reversedSequence.toString();
-	assertEquals("abc", actual);
+        ReversedSequence reversedSequence = new ReversedSequence("hello");
+        assertEquals("olleh", reversedSequence.toString());
     }
+
     @Test
-    public void testException() {
-	 assertThrows(ArithmeticException.class, () -> reversedSequence.reverse(), "Reversed sequence should throw ArithmeticException");
+    public void testEmptyString() {
+        ReversedSequence reversedSequence = new ReversedSequence("");
+        assertEquals("", reversedSequence.toString());
+    }
+
+    @Test
+    public void testNumbers() {
+        ReversedSequence reversedSequence = new ReversedSequence("12345");
+        assertEquals("54321", reversedSequence.toString());
     }
     // END
 }
