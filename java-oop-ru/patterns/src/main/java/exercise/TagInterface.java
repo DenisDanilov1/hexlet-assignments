@@ -1,7 +1,7 @@
 package exercise;
 
 // BEGIN
-public class TagImplementation implements TagInterface {
+public class TagInterface {
 
     @Override
     public String render() {
