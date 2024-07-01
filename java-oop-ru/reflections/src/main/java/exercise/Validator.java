@@ -28,7 +28,8 @@ public class Validator {
         return notValidFields;
     }
 
- public static Map<String, List<String>> advancedValidate(Object obj) {
+    public static Map<String, List<String>> advancedValidate(Object obj) {
+
         Map<String, List<String>> errorMap = new HashMap<>();
         try {
             for (java.lang.reflect.Field field : obj.getClass().getDeclaredFields()) {
@@ -40,7 +41,7 @@ public class Validator {
                     }
                 }
                 if (field.isAnnotationPresent(MinLength.class)) {
-                    int minLength = field.getAnnotation(MinLength.class).value();
+                    int minLength = field.getAnnotation(MinLength.class);
                     if (field.get(obj) != null && field.get(obj).toString().length() < minLength) {
                         errorMap.computeIfAbsent(fieldName, k -> new ArrayList<>()).add("length less than " + minLength);
                     }
