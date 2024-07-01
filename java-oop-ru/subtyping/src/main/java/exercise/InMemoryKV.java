@@ -1,47 +1,34 @@
 package exercise;
 
 import java.util.Map;
-import java.util.HashMap;
 
 // BEGIN
 public class InMemoryKV implements KeyValueStorage {
 
-    private final ConcurrentHashMap<String, Object> cache = new ConcurrentHashMap<>();
+    private Map<String, String> database;
 
-    public InMemoryKV(Map<String, Object> initialData) {
-        cache.putAll(initialData);
+    public InMemoryKV(Map<String, String> initialData) {
+        this.database = initialData;
     }
 
     @Override
-    public void set(String key, Object value) {
-        if (key == null) {
-	    return;
-	}
-        if (value == null) {
-	    cache.remove(key);
-	} else {
-	    cache.put(key, value);
-	}
+    public void set(String key, String value) {
+        database.put(key, value);
     }
 
     @Override
     public void unset(String key) {
-	cache.remove(key);
+        database.remove(key);
     }
 
     @Override
-    public Object get(String key) {
-	return cache.get(key);
+    public String get(String key) {
+        return database.getOrDefault(key, "Key not found");
     }
 
     @Override
-    public void clear() {
-	cache.clear();
-    }
-
-    @Override
-    public long size() {
-	return cache.size();
+    public Map<String, String> toMap() {
+        return database;
     }
 }
 // END

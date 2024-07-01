@@ -1,30 +1,38 @@
 package exercise;
 
 // BEGIN
+import java.util.Map;
+
 public class FileKV implements KeyValueStorage {
 
-    private String pathToFile;
-    private Map<String, String> initialValue;
+    private final String filePath;
+    private Map<String, String> data;
 
-    public FileKV(String pathToFile, Map<String, String> initialValue) {
-        this.pathToFile = pathToFile;
-        this.initialValue = initialValue;
+    public FileKV(String filePath, Map<String, String> initialData) {
+        this.filePath = filePath;
+        this.data = initialData;
+        Utils.writeFile(filePath, Utils.serialize(initialData));
     }
 
-    public void write(String key, String value) {
-        writeFile(key, value);
-    }
-
+    @Override
     public String get(String key, String defaultValue) {
-        return readFile(key, defaultValue);
+        if(data.containsKey(key)) {
+            return data.get(key);
+        } else {
+            return defaultValue;
+        }
     }
 
-    private void writeToFile(String key, String value) {
-        writeFile(pathToFile, key, value);
+    @Override
+    public void put(String key, String value) {
+        data.put(key, value);
+        Utils.writeFile(filePath, Utils.serialize(data));
     }
 
-    private void readFile(String key, String defaultValue) {
-        return readFile(pathToFile, key, defaultValue);
+    @Override
+    public void remove(String key) {
+        data.remove(key);
+        Utils.writeFile(filePath, Utils.serialize(data));
     }
 }
 // END
