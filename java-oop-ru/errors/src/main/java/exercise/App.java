@@ -3,7 +3,7 @@ package exercise;
 // BEGIN
 public class App {
 
-    public static void printSquare(Circle circle) {
+    public static void printSquare(Circle circle) throws NegativeRadiusException {
         try {
             int square = (int) Math.round(Math.PI * Math.pow(circle.getRadius(), 2));
             throw new NegativeRadiusException("Площадь круга: " + square);
