@@ -3,7 +3,7 @@ package exercise;
 import java.util.Map;
 
 // BEGIN
-class InMemoryKV implements KeyValueStorage {
+public class InMemoryKV implements KeyValueStorage {
 
     private Map<String, String> database;
 
