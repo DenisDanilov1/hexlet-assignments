@@ -6,7 +6,7 @@ public class App {
     public static void printSquare(Circle circle) {
         try {
             int square = (int) Math.round(Math.PI * circle.getRadius() * circle.getRadius());
-            System.out.println(square);
+            throw new NegativeRadiusException(square);
         } catch (NegativeRadiusException e) {
             System.out.println("The area could not be calculated");
         } finally {
