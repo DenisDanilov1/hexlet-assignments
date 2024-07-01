@@ -19,4 +19,5 @@ public class App {
         originalMap.clear();
         originalMap.putAll(swappedMap);
     }
+}
 // END
