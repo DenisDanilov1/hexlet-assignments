@@ -1,28 +1,25 @@
 package exercise;
 
 // BEGIN
-public Circle {
+public class Circle {
 
-    private double radius;
+    private Point center;
+    private int radius;
 
-    public Circle(double radius) {
+    public Circle(Point center, int radius) {
+        this.center = center;
         this.radius = radius;
     }
 
-    public double getRadius() {
+    public int getRadius() {
         return radius;
     }
 
-    public void setRadius(double radius) {
-        this.radius = radius;
-    }
-
-    public double getArea() {
+    public double getSquare() throws NegativeRadiusException {
+        if (radius < 0) {
+            throw new NegativeRadiusException("Radius cannot be negative");
+        }
         return Math.PI * radius * radius;
-    }
-
-    public double getCircumference() {
-        return 2 * Math.PI * radius;
     }
 }
 // END

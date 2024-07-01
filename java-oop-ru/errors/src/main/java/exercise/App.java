@@ -1,26 +1,19 @@
 package exercise;
 
 // BEGIN
-public class Circle {
+package exercise;
 
-    private Point centre;
-    private int radius;
+public class App {
 
-    public Circle() {
-	this(new Point(0, 0));
-    }
-
-    public Circle(int x, int y, int radius) {
-	this.setCenter(new Point(x, y));
-	this.radius = radius;
-    }
-
-    public int getRadius() {
-	return radius;
-    }
-
-    public Point getCenter() {
-	return centre;
+    public static void printSquare(Circle circle) {
+        try {
+            int square = (int) Math.round(Math.PI * circle.getRadius() * circle.getRadius());
+            System.out.println(square);
+        } catch (NegativeRadiusException e) {
+            System.out.println("The area could not be calculated");
+        } finally {
+            System.out.println("The calculation is over");
+        }
     }
 }
 // END
