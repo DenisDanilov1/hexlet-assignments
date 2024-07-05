@@ -29,7 +29,7 @@ class Validator {
             .collect(Collectors.toList());
     }
 
-    public static Map<String, List<String>> advancedValidate(Object instance) {\
+    public static Map<String, List<String>> advancedValidate(Object instance) {
 
         List<Field> fields = List.of(instance.getClass().getDeclaredFields());
         Map<String, List<String>> validationErrors = new HashMap<>();
