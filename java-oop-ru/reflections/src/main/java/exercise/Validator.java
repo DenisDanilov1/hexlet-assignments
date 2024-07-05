@@ -1,56 +1,73 @@
 package exercise;
 
 // BEGIN
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.stream.Collectors;
 
-public class Validator {
+class Validator {
 
-    public static List<String> validate(Object obj) {
+    public static List<String> validate(Object instance) {
 
-        List<String> notValidFields = new ArrayList<>();
-        Field[] fields = obj.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            if (field.isAnnotationPresent(NotNull.class)) {
-                field.setAccessible(true);
+        List<Field> fields = List.of(instance.getClass().getDeclaredFields());
+        return fields.stream()
+            .filter(field -> field.isAnnotationPresent(NotNull.class))
+            .filter(field -> {
+                Object value;
                 try {
-                    if (field.get(obj) == null) {
-                        notValidFields.add(field.getName());
-                    }
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                    field.setAccessible(true);
+                    value = field.get(instance);
+                    field.setAccessible(false);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
                 }
-            }
-        }
-        return notValidFields;
+                return value == null;
+            })
+            .map(Field::getName)
+            .collect(Collectors.toList());
     }
 
-    public static Map<String, List<String>> advancedValidate(Object obj) {
+    public static Map<String, List<String>> advancedValidate(Object instance) {\
 
-        Map<String, List<String>> errorMap = new HashMap<>();
-        try {
-            for (java.lang.reflect.Field field : obj.getClass().getDeclaredFields()) {
-                field.setAccessible(true);
+        List<Field> fields = List.of(instance.getClass().getDeclaredFields());
+        Map<String, List<String>> validationErrors = new HashMap<>();
+        fields.stream()
+            .filter(field -> field.isAnnotationPresent(NotNull.class) || field.isAnnotationPresent(MinLength.class))
+            .forEach(field -> {
                 String fieldName = field.getName();
-                if (field.isAnnotationPresent(NotNull.class)) {
-                    if (field.get(obj) == null) {
-                        errorMap.computeIfAbsent(fieldName, k -> new ArrayList<>()).add("can not be null");
-                    }
+                List<String> errors = getErrorsForField(field, instance);
+                if (!errors.isEmpty()) {
+                    validationErrors.put(fieldName, errors);
                 }
-                if (field.isAnnotationPresent(MinLength.class)) {
-                    int minLength = field.getAnnotation(MinLength.class);
-                    if (field.get(obj) != null && field.get(obj).toString().length() < minLength) {
-                        errorMap.computeIfAbsent(fieldName, k -> new ArrayList<>()).add("length less than " + minLength);
-                    }
-                }
-            }
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            });
+        return validationErrors;
+    }
+
+    public static List<String> getErrorsForField(Field field, Object instance) {
+
+        List<String> errors = new ArrayList<>();
+        String value;
+
+        try {
+            field.setAccessible(true);
+            value = (String) field.get(instance);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        return errorMap;
+
+        if (field.isAnnotationPresent(NotNull.class) && value == null) {
+            errors.add("can not be null");
+        }
+
+        if (field.isAnnotationPresent(MinLength.class)) {
+            int minLength = field.getAnnotation(MinLength.class).minLength();
+            if (value == null || value.length() < minLength) {
+                errors.add("length less than " + minLength);
+            }
+        }
+        return errors;
     }
 }
 // END
