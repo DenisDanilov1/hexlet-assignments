@@ -11,7 +11,7 @@ class Validator {
 
     public static List<String> validate(Object instance) {
 
-        List<FIELD> fields = List.of(instance.getClass().getDeclaredFields());
+        List<Field> fields = List.of(instance.getClass().getDeclaredFields());
         return fields.stream()
             .filter(field -> field.isAnnotationPresent(NotNull.class))
             .filter(field -> {
