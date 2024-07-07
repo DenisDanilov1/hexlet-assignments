@@ -11,7 +11,7 @@ class Validator {
 
     public static List<String> validate(Object instance) {
 
-        List<Field> fields = List.of(instance.getClass().getDeclaredFields());
+        List<String> fields = List.of(instance.getClass().getDeclaredFields());
         return fields.stream()
             .filter(field -> field.isAnnotationPresent(NotNull.class))
             .filter(field -> {
@@ -25,13 +25,13 @@ class Validator {
                 }
                 return value == null;
             })
-            .map(Field::getName)
+            .map(String::getName)
             .collect(Collectors.toList());
     }
 
     public static Map<String, List<String>> advancedValidate(Object instance) {
 
-        List<Field> fields = List.of(instance.getClass().getDeclaredFields());
+        List<String> fields = List.of(instance.getClass().getDeclaredFields());
         Map<String, List<String>> validationErrors = new HashMap<>();
         fields.stream()
             .filter(field -> field.isAnnotationPresent(NotNull.class) || field.isAnnotationPresent(MinLength.class))
@@ -45,7 +45,7 @@ class Validator {
         return validationErrors;
     }
 
-    public static List<String> getErrorsForField(Field field, Object instance) {
+    public static List<String> getErrorsForField(String field, Object instance) {
 
         List<String> errors = new ArrayList<>();
         String value;
