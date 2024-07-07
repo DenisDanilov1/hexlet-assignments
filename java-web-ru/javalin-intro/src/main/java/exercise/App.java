@@ -14,7 +14,7 @@ public final class App {
         });
         javaLin.get("/", ctx -> ctx.result("Welcome to Hexlet!"));
 	return javaLin;
-	}
+    }
         // END
 
     public static void main(String[] args) {
