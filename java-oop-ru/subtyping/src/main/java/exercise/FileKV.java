@@ -1,38 +1,37 @@
 package exercise;
 
-// BEGIN
+import java.util.HashMap;
 import java.util.Map;
 
+// BEGIN
 public class FileKV implements KeyValueStorage {
 
-    private final String filePath;
-    private Map<String, String> data;
+    private String path;
+    private Map<String, String> map;
 
-    public FileKV(String filePath, Map<String, String> initialData) {
-        this.filePath = filePath;
-        this.data = initialData;
-        Utils.writeFile(filePath, Utils.serialize(initialData));
+    public FileKV(String path, Map<String, String> map) {
+        this.path = path;
+        this.map = new HashMap<>(map);
+    }
+
+    @Override
+    public void set(String key, String value) {
+
+    }
+
+    @Override
+    public void unset(String key) {
+
     }
 
     @Override
     public String get(String key, String defaultValue) {
-        if(data.containsKey(key)) {
-            return data.get(key);
-        } else {
-            return defaultValue;
-        }
+        return "";
     }
 
     @Override
-    public void put(String key, String value) {
-        data.put(key, value);
-        Utils.writeFile(filePath, Utils.serialize(data));
-    }
-
-    @Override
-    public void remove(String key) {
-        data.remove(key);
-        Utils.writeFile(filePath, Utils.serialize(data));
+    public Map<String, String> toMap() {
+        return Map.of();
     }
 }
 // END

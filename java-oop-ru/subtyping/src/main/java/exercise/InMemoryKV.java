@@ -1,6 +1,7 @@
 package exercise;
 
 import java.util.Map;
+import java.util.HashMap;
 
 // BEGIN
 public class InMemoryKV implements KeyValueStorage {
@@ -22,13 +23,13 @@ public class InMemoryKV implements KeyValueStorage {
     }
 
     @Override
-    public String get(String key) {
-        return database.getOrDefault(key, "Key not found");
+    public String get(String key, String defaultValue) {
+        return database.get(key) != null ? database.get(key) : defaultValue;
     }
 
     @Override
     public Map<String, String> toMap() {
-        return database;
+        return new HashMap<>(database);
     }
 }
 // END
