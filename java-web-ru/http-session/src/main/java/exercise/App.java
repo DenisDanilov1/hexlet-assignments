@@ -16,9 +16,9 @@ public final class App {
 
         // BEGIN
         app.get("/users", ctx -> {
-        var page = ctx.bodyAsClass(clazz); });
+        var page = ctx.bodyAsClass("page"); });
 	app.get("/users?page=5&per=3", ctx -> {
-        var page = ctx.bodyAsClass(clazz); });
+        var page = ctx.bodyAsClass("page"); });
         // END
         return app;
 
