@@ -16,9 +16,9 @@ public final class App {
 
         // BEGIN
         app.get("/users", ctx -> {
-        var page = ctx.queryParamAsClass("5", Integer.class).get(); });
-	app.get("users?page=5&per=3", ctx -> {
-        var page = ctx.queryParamAsClass("5", Integer.class).get(); });
+        var page = ctx.queryParam("page", Integer.class).get(); });
+	app.get("/users?page=5&per=3", ctx -> {
+        var page = ctx.queryParam("page", Integer.class).get(); });
         // END
         return app;
 
