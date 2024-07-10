@@ -7,12 +7,12 @@ public final class App {
     public static Javalin getApp() {
 
         // BEGIN
-         var javaLin = Javalin.create(config -> {
+        var app = Javalin.create(config -> {
             config.bundledPlugins.enableDevLogging();
         });
-        javaLin.get("/phones", ctx -> ctx.json(Data.getPhones()));
-        javaLin.post("/domains", ctx -> ctx.json(Data.getDomains()));
-	return javaLin;
+        app.get("/phones", ctx -> ctx.json(Data.getPhones()));
+        app.post("/domains", ctx -> ctx.json(Data.getDomains()));
+	return app;
         // END
     }
 
