@@ -15,8 +15,12 @@ public final class App {
         });
 
         // BEGIN
-        app.get("/users?page=5", ctx -> {
-        var page = ctx.json(USERS); });
+        app.get("/users", ctx -> {
+        var page = ctx.json(USERS);
+	});
+	app.get("/users?page=5&per=3", ctx -> {
+        var page = ctx.json(USERS);
+	});
         // END
         return app;
 
