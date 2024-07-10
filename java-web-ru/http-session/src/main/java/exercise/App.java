@@ -15,10 +15,10 @@ public final class App {
         });
 
         // BEGIN
-        app.get("/users", ctx -> {
-        var page = ctx.json("3"); });
+        app.get("/users?page=1&per=5", ctx -> {
+        var page = ctx.json(USERS); });
 	app.get("/users?page=5&per=3", ctx -> {
-        var page = ctx.json("5"); });
+        var page = ctx.json(USERS); });
         // END
         return app;
 
