@@ -26,7 +26,7 @@ public final class App {
                     .findFirst()
                     .orElse(null);
 
-            if (results==null) {
+            if (results == null) {
                 throw new NotFoundResponse("Company not found");
             }
 
