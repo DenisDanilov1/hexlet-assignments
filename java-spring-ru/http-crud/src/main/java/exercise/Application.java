@@ -41,7 +41,7 @@ public class Application {
     @GetMapping("/posts/{id}") // Вывод страницы
     public Optional<Post> show(@PathVariable String id) {
         var post = posts.stream()
-            .getId().equals(id)
+            .filter(p -> p.getId().equals(id))
 	    .findFirst();
         return post;
     }
