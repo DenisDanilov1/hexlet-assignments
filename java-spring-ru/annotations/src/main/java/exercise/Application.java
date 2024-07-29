@@ -9,8 +9,8 @@ public class Application {
         var address = new Address("London", 12345678);
 
         // BEGIN
-        for (Method method : address.getDeclaredMethods()) {
-            if (method.isAnnotationPresent(exercise.model.Inspect.class)) {
+        for (Method method : Address.getDeclaredMethods()) {
+            if (method.isAnnotationPresent(exercise.annotation.Inspect.class)) {
                 System.out.println("Method " + method.getName() + " returns a value of type " + method.getReturnType().getName());
             }
         }
