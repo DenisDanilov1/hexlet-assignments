@@ -40,28 +40,36 @@ public class Application {
 
     @GetMapping("/posts/{id}")
     public ResponseEntity<Post> show(@PathVariable String id) {
-        var page = pages.stream()
-            .filter(p -> p.getId().equals(id))
-            .findFirst();
-        return page.map(post -> ResponseEntity.ok().body(post))
-                .orElseGet(() -> ResponseEntity.notFound().build());;
+        var post = posts.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst();
+        if (post.isPresent()) {
+            return ResponseEntity.ok().body(post.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Post());
+        }
     }
 
     @PostMapping("/posts")
     public ResponseEntity<Post> create(@RequestBody Post post) {
         posts.add(post);
-        return ResponseEntity.status(post);
+        return ResponseEntity.status(201).body(post);;
     }
 
     @PutMapping("/posts/{id}")
-    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody Post post) {
-        if (posts.isPresent()) {
-            post.setId(id);
-            posts.save(post);
-            return ResponseEntity.ok().build();
-        } else {
-            return ResponseEntity.noContent().build();
+    public ResponseEntity<Post> update(@PathVariable String id, @RequestBody Post data) {
+        var maybePage = posts.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst();
+        if (maybePage.isPresent()) {
+            var post = maybePage.get();
+            post.setId(data.getId());
+            post.setTitle(data.getTitle());
+            post.setBody(data.getBody());
+
+            return ResponseEntity.ok().body(data);
         }
+        return ResponseEntity.status(204).body(data);
     }
     // END
 
