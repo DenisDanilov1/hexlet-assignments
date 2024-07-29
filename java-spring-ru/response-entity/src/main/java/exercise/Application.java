@@ -34,7 +34,7 @@ public class Application {
         var result = posts.stream().limit(limit).toList();
 
         return ResponseEntity.ok()
-                .header("X-Total-Count", String.valueOf(pages.size()))
+                .header("X-Total-Count", String.valueOf(posts.size()))
                 .body(result);
     }
 
