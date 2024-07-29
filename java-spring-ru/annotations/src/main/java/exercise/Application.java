@@ -12,7 +12,7 @@ public class Application {
         for (Method method : Address.class.getDeclaredMethods()) {
             if (method.isAnnotationPresent(exercise.annotation.Inspect.class)) {
                 System.out.println("Method " + method.getName() + " returns a value of type " + method.getReturnType().getName());
-		System.out.println("Method " + method.getPostalCode() + " returns a value of type " + method.getReturnType().getPostalCode());
+		System.out.println("Method " + method.getCode() + " returns a value of type " + method.getReturnType().getCode());
             }
         }
         // END
