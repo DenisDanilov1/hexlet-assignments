@@ -35,13 +35,13 @@ public class Application {
     @PostMapping("/posts") // Создание страницы
     public Post create(@RequestBody Post post) {
         posts.add(post);
-        return posts;
+        return post;
     }
 
     @GetMapping("/posts/{id}") // Вывод страницы
     public Optional<Post> show(@PathVariable String id) {
         var post = posts.stream()
-            .getId().equals(id))
+            .getId().equals(id)
 	    .findFirst();
         return post;
     }
