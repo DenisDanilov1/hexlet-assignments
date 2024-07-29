@@ -35,34 +35,34 @@ public class Application {
     @PostMapping("/posts") // Создание страницы
     public Post create(@RequestBody Post post) {
         posts.add(post);
-        return posts;
+        return post;
     }
 
     @GetMapping("/posts/{id}") // Вывод страницы
     public Optional<Post> show(@PathVariable String id) {
         var post = posts.stream()
-            .filter(p -> p.getSlug().equals(id))
-            .findFirst();
+            .getId().equals(id))
+	    .findFirst();
         return post;
     }
 
     @PutMapping("/posts/{id}") // Обновление страницы
     public Post update(@PathVariable String id, @RequestBody Post data) {
         var maybePost = posts.stream()
-            .filter(p -> p.getSlug().equals(id))
-            .findFirst();
+	     .filter(p -> p.getId().equals(id))
+	     .findFirst();
         if (maybePost.isPresent()) {
             var post = maybePost.get();
-            post.setSlug(data.getSlug());
-            post.setName(data.getName());
             post.setBody(data.getBody());
+            post.setId(data.getId());
+            post.setTitle(data.getTitle());
         }
         return data;
     }
 
     @DeleteMapping("/posts/{id}") // Удаление страницы
     public void destroy(@PathVariable String id) {
-        posts.removeIf(p -> p.getSlug().equals(id));
+        posts.removeIf(p -> p.getId().equals(id));
     }
     // END
 }
