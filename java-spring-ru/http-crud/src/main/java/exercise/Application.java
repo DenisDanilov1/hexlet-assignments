@@ -28,7 +28,7 @@ public class Application {
 
     // BEGIN
     @GetMapping("/posts") // Список страниц
-    public List<Post> index(@RequestParam(page = "2", limit = "10") Integer limit) {
+    public List<Post> index(@RequestParam(defaultValue = "10") Integer limit) {
         return posts.stream().limit(limit).toList();
     }
 
