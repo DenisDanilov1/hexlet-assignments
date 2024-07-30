@@ -8,6 +8,7 @@ import exercise.dto.users.UserPage;
 import exercise.dto.users.UsersPage;
 import io.javalin.rendering.template.JavalinJte;
 import java.util.Collections;
+import static io.javalin.rendering.template.TemplateUtil.model;
 
 public final class App {
 
