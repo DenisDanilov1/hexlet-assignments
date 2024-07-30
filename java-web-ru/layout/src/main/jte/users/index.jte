@@ -1,11 +1,24 @@
-@extends("layout.jte")
+@import exercise.dto.users.UsersPage
+@param UsersPage page
 
-@section("body")
-    <h1>Список пользователей:</h1>
-    <ul>
-        {{ for user in users }}
-            <li><a href="/users/{{ user.id }}">{{ user.name }}</a></li>
-        {{ end }}
-    </ul>
-@endsection
+@template.layout.page(
+content = @`
+    <h1>Пользователи</h1>
+    <table class="table table-striped">
+        @for(var user : page.getUsers())
+            <tr>
+                <td>
+                    ${user.getId()}
+                </td>
+                <td>
+                    <a href="/users/${user.getId()}">${user.getFirstName()} ${user.getLastName()}</a>
+                </td>
+            </tr>
+        @endfor
+    </table>
+`,
+footer = @`
+    <p>Thanks for visiting, come again soon!</p>
+`
+)
 

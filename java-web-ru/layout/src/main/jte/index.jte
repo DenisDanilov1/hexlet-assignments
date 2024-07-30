@@ -1,7 +1,9 @@
-@extends("layout.jte")
-
-@section("body")
-    <h1>Добро пожаловать на сайт!</h1>
-    <p>Здесь вы можете найти интересную информацию</p>
-@endsection
+@template.layout.page(
+    content = @`
+        <h2>Welcome to Hexlet</h2>
+    `,
+    footer = @`
+        <p>Thanks for visiting, come again soon!</p>
+    `
+)
 

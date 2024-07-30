@@ -1,7 +1,14 @@
-@extends("layout.jte")
+@import exercise.dto.users.UserPage
+@param UserPage page
 
-@section("body")
-    <h1>{{ user.name }}</h1>
-    <p>Email: {{ user.email }}</p>
-@endsection
+@template.layout.page(
+
+content = @`
+    <h2>${page.getUser().getFirstName()} ${page.getUser().getLastName()}</h2>
+    <div>${page.getUser().getEmail()}</div>
+`,
+footer = @`
+    <p>Thanks for visiting, come again soon!</p>
+`
+)
 
