@@ -1,7 +1,7 @@
 package exercise.controller.users;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +16,7 @@ import exercise.model.Post;
 // BEGIN
 @RestController
 @RequestMapping("/api")
-public class UserController {
-
+public class PostsController {
     private static final List<Post> posts = new ArrayList<>();
 
     @GetMapping("/users/{id}/posts")
@@ -31,7 +30,7 @@ public class UserController {
     public Post create(@PathVariable String id, @RequestBody Post post) {
         post.setUserId(Integer.parseInt(id));
         posts.add(post);
-        return post; 
+        return post;
     }
 }
 // END
