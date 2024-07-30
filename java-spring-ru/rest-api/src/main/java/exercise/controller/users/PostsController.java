@@ -21,14 +21,14 @@ public class UserController {
     private static final List<Post> posts = new ArrayList<>();
 
     @GetMapping("/users/{id}/posts")
-    public List<Post> getUserPosts(@PathVariable String id) {
+    public List<Post> index(@PathVariable String id) {
         var parsedId = Integer.parseInt(id);
         return posts.stream().filter(p -> p.getUserId() == parsedId).toList();
     }
 
     @PostMapping("/users/{id}/posts")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createPost(@PathVariable String id, @RequestBody Post post) {
+    public Post create(@PathVariable String id, @RequestBody Post post) {
         post.setUserId(Integer.parseInt(id));
         posts.add(post);
         return post; 
