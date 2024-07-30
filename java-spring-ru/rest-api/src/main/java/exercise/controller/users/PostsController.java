@@ -1,6 +1,7 @@
 package exercise.controller.users;
 
 import java.util.List;
+import java.util.ArrayList;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import exercise.model.Post;
-import exercise.Data;
 
 // BEGIN
 @RestController
