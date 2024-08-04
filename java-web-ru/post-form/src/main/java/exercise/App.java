@@ -2,6 +2,8 @@ package exercise;
 
 import io.javalin.Javalin;
 import java.util.List;
+import java.util.Objects;
+
 import static io.javalin.rendering.template.TemplateUtil.model;
 import io.javalin.rendering.template.JavalinJte;
 import exercise.model.User;
