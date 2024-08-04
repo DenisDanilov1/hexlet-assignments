@@ -1,16 +1,12 @@
 package exercise;
 
 import io.javalin.Javalin;
-import java.util.List;
-import java.util.Objects;
 
-import static io.javalin.rendering.template.TemplateUtil.model;
-import io.javalin.rendering.template.JavalinJte;
+import java.util.List;
 import exercise.model.User;
 import exercise.dto.users.UsersPage;
-import exercise.repository.UserRepository;
+import java.util.Collections;
 import org.apache.commons.lang3.StringUtils;
-import exercise.util.Security;
 
 public final class App {
 
@@ -32,21 +28,19 @@ public final class App {
         });
 
         // BEGIN
-        app.get("/users/build", ctx -> {
-            ctx.render("users/build.jte");
-        });
-
-        app.post("/users", ctx -> {
-            var firstName = getCapitalizedWord(ctx.formParam("firstName"));
-            var lastName = getCapitalizedWord(ctx.formParam("lastName"));
-            var email = Objects.requireNonNull(ctx.formParam("email")).toLowerCase().trim();
-            var password = Security.encrypt(Objects.requireNonNull(ctx.formParam("password")));
-
-            var User = new User(firstName, lastName, email, password);
-
-            UserRepository.save(User);
-
-            ctx.redirect("/users");
+        app.get("/users", ctx -> {
+            var term  = ctx.queryParam("term");
+            List<User> filteredUsers;
+            if (term != null) {
+                filteredUsers = USERS
+                        .stream()
+                        .filter(u -> StringUtils.startsWithIgnoreCase(u.getFirstName(), term))
+                        .toList();
+            } else {
+                filteredUsers = USERS;
+            }
+            var page = new UsersPage(filteredUsers, term);
+            ctx.render("users/index.jte", Collections.singletonMap("page", page));
         });
         // END
 
