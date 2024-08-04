@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.Getter;
 
 // BEGIN
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BuildArticlePage {
     private String title;
     private String content;
