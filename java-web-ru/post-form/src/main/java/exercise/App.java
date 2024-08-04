@@ -1,5 +1,7 @@
 package exercise;
 
+import static io.javalin.rendering.template.TemplateUtil.model;
+import io.javalin.rendering.template.JavalinJte;
 import io.javalin.Javalin;
 import java.util.List;
 import java.util.Collections;
