@@ -1,12 +1,13 @@
 package exercise;
 
 import io.javalin.Javalin;
-
 import java.util.List;
+import java.util.Collections;
 import exercise.model.User;
 import exercise.dto.users.UsersPage;
-import java.util.Collections;
+import exercise.repository.UserRepository;
 import org.apache.commons.lang3.StringUtils;
+import exercise.util.Security;
 
 public final class App {
 
@@ -28,19 +29,21 @@ public final class App {
         });
 
         // BEGIN
-        app.get("/users", ctx -> {
-            var term  = ctx.queryParam("term");
-            List<User> filteredUsers;
-            if (term != null) {
-                filteredUsers = USERS
-                        .stream()
-                        .filter(u -> StringUtils.startsWithIgnoreCase(u.getFirstName(), term))
-                        .toList();
-            } else {
-                filteredUsers = USERS;
-            }
-            var page = new UsersPage(filteredUsers, term);
-            ctx.render("users/index.jte", Collections.singletonMap("page", page));
+        app.get("/users/build", ctx -> {
+            ctx.render("users/build.jte");
+        });
+
+        app.post("/users", ctx -> {
+            var firstName = ctx.formParam("firstName");
+            var lastName = ctx.formParam("lastName");
+            var email = ctx.formParam("email");
+            var password = ctx.formParam("password");
+            var confirmPassword = ctx.formParam("confirmPassword");
+
+            var user = new User(StringUtils.capitalize(firstName),
+                    StringUtils.capitalize(lastName), email.trim().toLowerCase(), Security.encrypt(password));
+            UserRepository.save(user);
+            ctx.redirect("/users");
         });
         // END
 
