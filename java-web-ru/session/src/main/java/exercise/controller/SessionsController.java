@@ -6,6 +6,7 @@ import exercise.dto.MainPage;
 import exercise.dto.LoginPage;
 import exercise.model.User;
 import exercise.repository.UsersRepository;
+import io.javalin.http.Context;
 import static exercise.util.Security.encrypt;
 
 public class SessionsController {
