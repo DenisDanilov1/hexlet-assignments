@@ -1,4 +1,4 @@
-\package exercise.repository;
+package exercise.repository;
 
 import java.util.List;
 import java.util.ArrayList;
