@@ -1,13 +1,15 @@
 package exercise.controller;
 
-import static io.javalin.rendering.template.TemplateUtil.model;
+import org.apache.commons.lang3.StringUtils;
 import exercise.util.Security;
 import exercise.model.User;
 import exercise.util.NamedRoutes;
+import static io.javalin.rendering.template.TemplateUtil.model;
 import exercise.repository.UserRepository;
+import exercise.dto.users.UserPage;
 import io.javalin.http.NotFoundResponse;
 import io.javalin.http.Context;
-import org.apache.commons.lang3.StringUtils;
+
 
 public class UsersController {
 
@@ -16,7 +18,7 @@ public class UsersController {
     }
 
     // BEGIN
-    public static void create(Context ctx) throws Exception {
+     public static void create(Context ctx) throws Exception {
         var firstName = StringUtils.capitalize(ctx.formParam("firstName"));
         var lastName = StringUtils.capitalize(ctx.formParam("lastName"));
         var email = ctx.formParam("email").trim().toLowerCase();
