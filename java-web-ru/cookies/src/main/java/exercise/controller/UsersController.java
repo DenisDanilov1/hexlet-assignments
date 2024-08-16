@@ -6,7 +6,7 @@ import exercise.util.NamedRoutes;
 import exercise.repository.UserRepository;
 import io.javalin.http.NotFoundResponse;
 import io.javalin.http.Context;
-import java.util.Collections;
+import org.apache.commons.lang3.StringUtils;
 
 
 public class UsersController {
@@ -16,7 +16,7 @@ public class UsersController {
     }
 
     // BEGIN
-     public static void create(Context ctx) throws Exception {
+    public static void create(Context ctx) throws Exception {
         var firstName = StringUtils.capitalize(ctx.formParam("firstName"));
         var lastName = StringUtils.capitalize(ctx.formParam("lastName"));
         var email = ctx.formParam("email").trim().toLowerCase();
@@ -40,7 +40,7 @@ public class UsersController {
             ctx.redirect(NamedRoutes.buildUserPath());
             return;
         }
-        var page = new UserPage(user);
+        var page = new User(user);
         ctx.render("users/show.jte", model("page", page));
     }
     // END
