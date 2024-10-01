@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @EntityListeners(AuditingEntityListener.class)
 @Setter
 @Getter
-class Task {
+public class Task {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
