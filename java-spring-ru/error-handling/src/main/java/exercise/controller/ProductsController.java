@@ -41,7 +41,7 @@ public class ProductsController {
     @ResponseStatus(HttpStatus.OK)
     public Product show(@PathVariable Long id) {
         var product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " Not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
         return product;
     }
 
@@ -49,7 +49,7 @@ public class ProductsController {
     @ResponseStatus(HttpStatus.OK)
     public Product show(@RequestBody Product data, @PathVariable Long id) {
         var product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " Not Found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
         product.setTitle(data.getTitle());
         product.setPrice(data.getPrice());
         productRepository.save(product);
