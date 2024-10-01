@@ -45,7 +45,7 @@ public class ProductsController {
         return product;
     }
 
-    @PutMapping(puth = "{id}")
+    @PutMapping(path = "{id}")
     @ResponseStatus(HttpStatus.OK)
     public Product show(@RequestBody Product data, @PathVariable Long id) {
         var product = productRepository.findById(id)
