@@ -41,6 +41,16 @@ class ApplicationTest {
     @Autowired
     private TaskRepository taskRepository;
 
+    public Task createTask() {
+        var task = Instancio.of(Task.class)
+            .ignore(Select.field(Task::getId))
+            .ignore(Select.field(Task::getUpdatedAt))
+            .ignore(Select.field(Task::getCreatedAt))
+            .supply(Select.field(Task::getTitle), () -> faker.lorem().word())
+            .supply(Select.field(Task::getDescription), () -> faker.lorem().paragraph())
+            .create();
+        return task;
+    }
 
     @Test
     public void testWelcomePage() throws Exception {
