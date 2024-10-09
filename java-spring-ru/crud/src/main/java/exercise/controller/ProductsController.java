@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
-import exercise.repository.CategoryRepository;
 import exercise.exception.ResourceNotFoundException;
 import exercise.repository.ProductRepository;
 import jakarta.validation.Valid;
@@ -36,46 +34,41 @@ public class ProductsController {
     // BEGIN
     @GetMapping(path = "")
     public List<ProductDTO> index() {
-        var products = productRepository.findAll();
-        return products.stream()
-                .map(productMapper::map)
+        return productRepository.findAll().stream()
+                .map(product -> productMapper.map(product))
                 .toList();
     }
 
-    @GetMapping(path = "/{id}")
-    public ProductDTO show(@PathVariable Long id) {
+    @GetMapping(path = "{id}")
+    public ProductDTO index(@PathVariable("id") long id) {
         var product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
         return productMapper.map(product);
     }
 
     @PostMapping(path = "")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductDTO create(@RequestBody ProductCreateDTO dataDTO) {
-        var product = productMapper.map(dataDTO);
-        var category = categoryRepository.findById(dataDTO.getCategoryId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
-        product.setCategory(category);
+    public ProductDTO create(@RequestBody @Valid ProductCreateDTO data) {
+        var product = productMapper.map(data);
         productRepository.save(product);
         return productMapper.map(product);
     }
 
-    @PutMapping(path = "/{id}")
-    public ProductDTO update(@RequestBody ProductUpdateDTO dataDTO, @PathVariable Long id) {
+    @PutMapping(path = "{id}")
+    public ProductDTO update(@PathVariable("id") long id, @RequestBody @Valid ProductUpdateDTO data) {
         var product = productRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
-        productMapper.update(dataDTO, product);
-        var category = categoryRepository.findById(dataDTO.getCategoryId().get())
-                .orElseThrow(() -> new ResourceNotFoundException("Category not found"));
-        product.setCategory(category);
+                .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
+        productMapper.update(data, product);
         productRepository.save(product);
         return productMapper.map(product);
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void destroy(@PathVariable Long id) {
-        productRepository.deleteById(id);
+    public void delete(@PathVariable("id") long id) {
+        var product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found"));
+        productRepository.delete(product);
     }
     // END
 }
