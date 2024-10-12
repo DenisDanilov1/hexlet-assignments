@@ -6,6 +6,7 @@ import exercise.dto.BookUpdateDTO;
 import exercise.exception.ResourceNotFoundException;
 import exercise.mapper.BookMapper;
 import exercise.repository.BookRepository;
+import exercise.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class BookService {
     // BEGIN
     @Autowired
     private BookRepository repository;
-    
+
     @Autowired
     private AuthorRepository authorRepository;
 
