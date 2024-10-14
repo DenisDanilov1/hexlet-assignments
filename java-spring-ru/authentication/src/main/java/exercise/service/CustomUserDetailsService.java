@@ -15,17 +15,18 @@ public class CustomUserDetailsService implements UserDetailsManager {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        // Нужно добавить в репозиторий findByEmail
-        var user = userRepository.findByEmail(email)
+        return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return user;
     }
 
     @Override
     public void createUser(UserDetails userData) {
-        throw new UnsupportedOperationException("Unimplemented method 'createUser'");
+        throw new UnsupportedOperationException("Unimplemented method 'updateUser'");
     }
 
     @Override
